@@ -15,6 +15,7 @@ namespace GamePadTest
 
         public GamePadState CurrentPadState { get; private set; }
         public SpriteFont CourierFont { get; private set; }
+        public Texture2D GamepadTexture { get; private set; }
 
         public MyGame()
         {
@@ -47,6 +48,7 @@ namespace GamePadTest
 
             // TODO: use this.Content to load your game content here
             CourierFont = Content.Load<SpriteFont>("Fonts/CourierFont");
+            GamepadTexture = Content.Load<Texture2D>("Graphics/Gamepad");
         }
 
         /// <summary>
@@ -127,6 +129,7 @@ namespace GamePadTest
             RenderPadTopView();
             #endregion
         }
+
         private readonly Dictionary<string, Vector2> PartsTextPositions = new Dictionary<string, Vector2>()
         {
             { "A", new Vector2(2, 2) },
@@ -173,13 +176,61 @@ namespace GamePadTest
         private void RenderVisualLegend()
         {
             spriteBatch.DrawString(CourierFont, CurrentPadState.IsConnected ? "Connected" : "Disconnected", legendPositions[0], CurrentPadState.IsConnected ? Color.Green : Color.Red);
-            //spriteBatch.DrawString(CourierFont, "Released", legendPositions[1], Color.Green);
-            //spriteBatch.DrawString(CourierFont, "Pressed", legendPositions[2], Color.Red);
+            spriteBatch.DrawString(CourierFont, "Released", legendPositions[1], Color.Green);
+            spriteBatch.DrawString(CourierFont, "Pressed", legendPositions[2], Color.Red);
         }
+
+        private readonly Rectangle[] gamepadRects = new Rectangle[]
+        {
+            new Rectangle(350, 200, 400, 200),
+            new Rectangle(0, 0, 400, 200)
+        };
+        private readonly Rectangle[] dPadRects = new Rectangle[]
+        {
+            new Rectangle(10, 210, 18, 18),
+            new Rectangle(40, 210, 18, 18),
+            new Rectangle(35 + 350, 51 + 200, 18, 18),
+            new Rectangle(35 + 350, 87 + 200, 18, 18),
+            new Rectangle(17 + 350, 69 + 200, 18, 18),
+            new Rectangle(53 + 350, 69 + 200, 18, 18)
+        };
+        private readonly Rectangle[] abxyButtonsRects = new Rectangle[]
+        {
+            new Rectangle(70, 210, 28, 28),
+            new Rectangle(130, 210, 28, 28),
+            new Rectangle(351 + 350, 67 + 200, 28, 28),
+            new Rectangle(315 + 350, 105 + 200, 28, 28),
+            new Rectangle(278 + 350, 67 + 200, 28, 28),
+            new Rectangle(314 + 350, 30 + 200, 28, 28)
+        };
+        private readonly Rectangle[] startbackButtonsRects = new Rectangle[]
+        {
+            new Rectangle(140, 210, 30, 10),
+            new Rectangle(180, 210, 30, 10),
+            new Rectangle(130 + 350, 87 + 200, 30, 10),
+            new Rectangle(221 + 350, 88 + 200, 30, 10)
+        };
         private void RenderPadFace()
         {
-            
+            // Gamepad
+            spriteBatch.Draw(GamepadTexture, gamepadRects[0], gamepadRects[1], Color.White);
+            // D-pad
+            spriteBatch.Draw(GamepadTexture, dPadRects[2], CurrentPadState.DPad.Up == ButtonState.Released ? dPadRects[0] : dPadRects[1], Color.White);
+            spriteBatch.Draw(GamepadTexture, dPadRects[3], CurrentPadState.DPad.Down == ButtonState.Released ? dPadRects[0] : dPadRects[1], Color.White);
+            spriteBatch.Draw(GamepadTexture, dPadRects[4], CurrentPadState.DPad.Left == ButtonState.Released ? dPadRects[0] : dPadRects[1], Color.White);
+            spriteBatch.Draw(GamepadTexture, dPadRects[5], CurrentPadState.DPad.Right == ButtonState.Released ? dPadRects[0] : dPadRects[1], Color.White);
+            // A-B-X-Y buttons
+            spriteBatch.Draw(GamepadTexture, abxyButtonsRects[2], CurrentPadState.Buttons.A == ButtonState.Released ? abxyButtonsRects[0] : abxyButtonsRects[1], Color.White);
+            spriteBatch.Draw(GamepadTexture, abxyButtonsRects[3], CurrentPadState.Buttons.B == ButtonState.Released ? abxyButtonsRects[0] : abxyButtonsRects[1], Color.White);
+            spriteBatch.Draw(GamepadTexture, abxyButtonsRects[4], CurrentPadState.Buttons.X == ButtonState.Released ? abxyButtonsRects[0] : abxyButtonsRects[1], Color.White);
+            spriteBatch.Draw(GamepadTexture, abxyButtonsRects[5], CurrentPadState.Buttons.Y == ButtonState.Released ? abxyButtonsRects[0] : abxyButtonsRects[1], Color.White);
+            // Start-Back buttons
+            spriteBatch.Draw(GamepadTexture, startbackButtonsRects[2], CurrentPadState.Buttons.Back == ButtonState.Released ? startbackButtonsRects[0] : startbackButtonsRects[1], Color.White);
+            spriteBatch.Draw(GamepadTexture, startbackButtonsRects[3], CurrentPadState.Buttons.Start == ButtonState.Released ? startbackButtonsRects[0] : startbackButtonsRects[1], Color.White);
+            // "Big" button
+            // Sticks
         }
+
         private void RenderPadTopView()
         {
 
