@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamePadTest", "GamePadTest\GamePadTest.csproj", "{8442F5F1-C17B-40D2-A7B9-48BBF0FDEAC1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8442F5F1-C17B-40D2-A7B9-48BBF0FDEAC1}.Debug|x86.ActiveCfg = Debug|x86
+		{8442F5F1-C17B-40D2-A7B9-48BBF0FDEAC1}.Debug|x86.Build.0 = Debug|x86
+		{8442F5F1-C17B-40D2-A7B9-48BBF0FDEAC1}.Release|x86.ActiveCfg = Release|x86
+		{8442F5F1-C17B-40D2-A7B9-48BBF0FDEAC1}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {81295000-63DC-46F3-9F2B-4DEA5F21607A}
+	EndGlobalSection
+EndGlobal
