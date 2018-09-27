@@ -166,13 +166,15 @@ namespace GamePadTest
 
         private readonly Vector2[] legendPositions = new Vector2[]
         {
+            new Vector2(350,2),
             new Vector2(600,2),
             new Vector2(700,2)
         };
         private void RenderVisualLegend()
         {
-            //spriteBatch.DrawString(CourierFont, "Released", legendPositions[0], Color.Green);
-            //spriteBatch.DrawString(CourierFont, "Pressed", legendPositions[1], Color.Red);
+            spriteBatch.DrawString(CourierFont, CurrentPadState.IsConnected ? "Connected" : "Disconnected", legendPositions[0], CurrentPadState.IsConnected ? Color.Green : Color.Red);
+            //spriteBatch.DrawString(CourierFont, "Released", legendPositions[1], Color.Green);
+            //spriteBatch.DrawString(CourierFont, "Pressed", legendPositions[2], Color.Red);
         }
         private void RenderPadFace()
         {
