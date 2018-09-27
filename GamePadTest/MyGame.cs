@@ -210,6 +210,12 @@ namespace GamePadTest
             new Rectangle(130 + 350, 87 + 200, 30, 10),
             new Rectangle(221 + 350, 88 + 200, 30, 10)
         };
+        private readonly Rectangle[] bigButtonRects = new Rectangle[]
+        {
+            new Rectangle(220, 210, 78, 54),
+            new Rectangle(310, 210, 78, 54),
+            new Rectangle(156 + 350, 14 + 200, 78, 54)
+        };
         private void RenderPadFace()
         {
             // Gamepad
@@ -228,6 +234,7 @@ namespace GamePadTest
             spriteBatch.Draw(GamepadTexture, startbackButtonsRects[2], CurrentPadState.Buttons.Back == ButtonState.Released ? startbackButtonsRects[0] : startbackButtonsRects[1], Color.White);
             spriteBatch.Draw(GamepadTexture, startbackButtonsRects[3], CurrentPadState.Buttons.Start == ButtonState.Released ? startbackButtonsRects[0] : startbackButtonsRects[1], Color.White);
             // "Big" button
+            spriteBatch.Draw(GamepadTexture, bigButtonRects[2], CurrentPadState.Buttons.BigButton == ButtonState.Released ? bigButtonRects[0] : bigButtonRects[1], Color.White);
             // Sticks
         }
 
