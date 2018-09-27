@@ -15,7 +15,9 @@ namespace GamePadTest
         static void Main()
         {
             using (var game = new MyGame())
+            {
                 game.Run();
+            }
         }
     }
 #endif
