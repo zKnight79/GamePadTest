@@ -197,9 +197,9 @@ namespace GamePadTest
         private readonly Rectangle[] abxyButtonsRects = new Rectangle[]
         {
             new Rectangle(70, 210, 28, 28),
-            new Rectangle(130, 210, 28, 28),
-            new Rectangle(351 + 350, 67 + 200, 28, 28),
+            new Rectangle(103, 210, 28, 28),
             new Rectangle(315 + 350, 105 + 200, 28, 28),
+            new Rectangle(351 + 350, 67 + 200, 28, 28),
             new Rectangle(278 + 350, 67 + 200, 28, 28),
             new Rectangle(314 + 350, 30 + 200, 28, 28)
         };
@@ -216,6 +216,21 @@ namespace GamePadTest
             new Rectangle(310, 210, 78, 54),
             new Rectangle(156 + 350, 14 + 200, 78, 54)
         };
+        private readonly Rectangle[] stickRects = new Rectangle[]
+        {
+            new Rectangle(400, 210, 6, 6),
+            new Rectangle(410, 210, 6, 6),
+            new Rectangle(112 + 350, 159 + 200, 6, 6),
+            new Rectangle(273 + 350, 159 + 200, 6, 6)
+        };
+        private readonly float stickRadius = 32f;
+        private Rectangle ComputeStickRect(Rectangle baseRect, Vector2 stick)
+        {
+            Rectangle stickRect = baseRect;
+            stickRect.X += (int)(stickRadius * stick.X);
+            stickRect.Y -= (int)(stickRadius * stick.Y);
+            return stickRect;
+        }
         private void RenderPadFace()
         {
             // Gamepad
@@ -236,6 +251,8 @@ namespace GamePadTest
             // "Big" button
             spriteBatch.Draw(GamepadTexture, bigButtonRects[2], CurrentPadState.Buttons.BigButton == ButtonState.Released ? bigButtonRects[0] : bigButtonRects[1], Color.White);
             // Sticks
+            spriteBatch.Draw(GamepadTexture, ComputeStickRect(stickRects[2], CurrentPadState.ThumbSticks.Left), CurrentPadState.Buttons.LeftStick == ButtonState.Released ? stickRects[0] : stickRects[1], Color.White);
+            spriteBatch.Draw(GamepadTexture, ComputeStickRect(stickRects[3], CurrentPadState.ThumbSticks.Right), CurrentPadState.Buttons.RightStick == ButtonState.Released ? stickRects[0] : stickRects[1], Color.White);
         }
 
         private void RenderPadTopView()
