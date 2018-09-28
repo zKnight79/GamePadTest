@@ -255,9 +255,35 @@ namespace GamePadTest
             spriteBatch.Draw(GamepadTexture, ComputeStickRect(stickRects[3], CurrentPadState.ThumbSticks.Right), CurrentPadState.Buttons.RightStick == ButtonState.Released ? stickRects[0] : stickRects[1], Color.White);
         }
 
+        private readonly Rectangle[] toppadRects = new Rectangle[]
+        {
+            new Rectangle(350, 100, 400, 60),
+            new Rectangle(0, 300, 400, 60)
+        };
+        private readonly Rectangle[] shouldersRects = new Rectangle[]
+        {
+            new Rectangle(130, 370, 102, 10),
+            new Rectangle(240, 370, 102, 10),
+            new Rectangle(6 + 350, 343 - 200, 102, 10),
+            new Rectangle(291 + 350, 343 - 200, 102, 10)
+        };
+        private readonly Rectangle[] triggersRects = new Rectangle[]
+        {
+            new Rectangle(10, 370, 55, 25),
+            new Rectangle(70, 370, 55, 25),
+            new Rectangle(6 + 350, 306 - 200, 55, 25),
+            new Rectangle(338 + 350, 306 - 200, 55, 25)
+        };
         private void RenderPadTopView()
         {
-
+            // Gamepad Top-view
+            spriteBatch.Draw(GamepadTexture, toppadRects[0], toppadRects[1], Color.White);
+            // LB/RB
+            spriteBatch.Draw(GamepadTexture, shouldersRects[2], CurrentPadState.Buttons.LeftShoulder == ButtonState.Released ? shouldersRects[0] : shouldersRects[1], Color.White);
+            spriteBatch.Draw(GamepadTexture, shouldersRects[3], CurrentPadState.Buttons.RightShoulder == ButtonState.Released ? shouldersRects[0] : shouldersRects[1], Color.White);
+            // LT/RT
+            spriteBatch.Draw(GamepadTexture, triggersRects[2], CurrentPadState.Triggers.Left < 0.001f ? triggersRects[0] : triggersRects[1], Color.White);
+            spriteBatch.Draw(GamepadTexture, triggersRects[3], CurrentPadState.Triggers.Right < 0.001f ? triggersRects[0] : triggersRects[1], Color.White);
         }
     }
 }
